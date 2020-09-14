@@ -1,7 +1,7 @@
 package day0912;
 
 public class interview01 {
-    //求一个字符串最长重复子串
+   /* //求一个字符串最长重复子串
    // 给一个字符串，求该字符串的最长重复子串，子串可以包含重叠部分
     //遍历该字符串和进行字符之间的比较 实用一个滑动窗口 之比较两端的字符是否相等
     //依次从左向右滑动,滑动的过程中比较尺子两端的字符是否相等 并且更新字符串的最大长度
@@ -35,4 +35,52 @@ public class interview01 {
         return null;
     }
 
+    public static void main(String[] args) {
+        String  str = "abcaba";
+        System.out.println(getStr(str));
+    }
+*/
+
+
+
+
+
+
+   //求解字符串中最长重复子串
+    //使用两个指针,两个指针的间隔从123依次增大 同时向右移动两个指针 在移动过程中判断指针
+    //位置的字符是否相同,并记录最长子串的长度
+    public  static String  maxRepat (String input) {
+        //
+        if (input ==null|| input.length()==0) {
+            return null;
+        }
+        //重复子串的最长长度
+        int max = 0;
+        int first =0;
+        int k = 0;
+        for (int i =1 ; i<input.length();i++) {
+            for(int j = 0;j<input.length()-i;j++) {
+                if (input.charAt(j)==input.charAt(j+i)) {
+                    k++;
+                }else{
+                    k=0;
+                }
+                if (k>max) {
+                   max = k ;
+                   first = j - k + 1;
+                }
+            }
+        }
+        if (max>0) {
+            //System.out.println(max);
+            return input.substring(first,first+max);
+        }
+        return null;
+
+    }
+
+    public static void main(String[] args) {
+        String s = "abcdeabcabcde";
+        System.out.println(maxRepat(s));
+    }
 }
